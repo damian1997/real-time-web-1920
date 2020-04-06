@@ -12,6 +12,11 @@ Clone repository to your local directory
 git clone https://github.com/damian1997/real-time-web-1920.git
 ```
 
+Installing dependencies
+```
+npm install
+```
+
 Bundle core assets and watch files
 ```
 npm run bundle
