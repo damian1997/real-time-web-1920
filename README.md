@@ -3,7 +3,12 @@ Repository for the Real-Time-Web course.
 [DEMO](https://mysterious-harbor-42719.herokuapp.com/)
 
 ## Table of contents
+* [Prerequisites](#prerequisites)
 * [Installing](#installing)
+
+## Prerequisites
+* Nodejs
+* NPM
 
 ## Installing
 
