@@ -148,9 +148,9 @@ NAMESPACES.tech.on('connection', (socket) => {
     socket.broadcast.emit('user-connected', name)
   })
 
-  socket.on('chat-message', (message) => {
+  socket.on('chat-message', (message, sender = 'other') => {
     console.log(message)
-    NAMESPACES.tech.emit('chat-message', { message: message, actor: 'user', name: socket.customProps.name })
+    socket.broadcast.emit('chat-message', { message: message, actor: 'user', name: socket.customProps.name, sender })
   })
   
   socket.on('command-ran', (ranCommand) => {

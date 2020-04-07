@@ -11,7 +11,7 @@ switch(window.location.pathname) {
 
       socket.on('chat-message', (data) => {
         console.log(data)
-        appendMessage(`${data.name}: ${data.message}`, data.actor)
+        appendMessage(`${data.name}: ${data.message}`, data.actor, data.sender)
       })
 
       socket.on('user-connected', name => {
@@ -88,15 +88,20 @@ function formHandler(socket) {
     if(MESSAGEINPUT.value.charAt(0) === '!') {
       socket.emit('command-ran', MESSAGEINPUT.value)
     } else {
+      console.log('heey')
+      appendMessage(MESSAGEINPUT.value, 'self')
       socket.emit('chat-message', MESSAGEINPUT.value)
     }
     MESSAGEINPUT.value = ''
   })
 }
 
-function  appendMessage(message, actor = 'server') {
+function  appendMessage(message, actor = 'server', foo) {
   let li = document.createElement('li')  
   li.classList.add(actor)
+  if(foo) {
+    li.classList.add(foo)
+  }
   li.innerHTML = message
   document.getElementById('messages').appendChild(li)
 }

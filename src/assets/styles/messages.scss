@@ -5,7 +5,8 @@
   &--container {
     flex: 1;
     margin: 0;
-    padding: 0;
+    padding: 0 80px;
+    list-style: none;
     background: #ddd;
 
     .server {
@@ -13,6 +14,12 @@
     }
     .user {
       color: #000;
+    }
+    .self {
+      text-align: right;
+    }
+    .other {
+      text-align: left;
     }
   }
   &--controls {
