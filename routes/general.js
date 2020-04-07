@@ -5,3 +5,4 @@ export default function(req,res,COMPONENTPATH,BUNDLE) {
     bundledJS: BUNDLE['main.js']
   })
 }
+
