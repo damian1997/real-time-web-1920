@@ -3,9 +3,14 @@ Repository for the Real-Time-Web course..
 [DEMO](https://mysterious-harbor-42719.herokuapp.com/)
 
 ## Table of contents
+* [Description](#description)
 * [Diagram](#diagram)
 * [Prerequisites](#prerequisites)
 * [Installing](#installing)
+
+# Description
+This application tries to bring people together online to listnen to their favorite music genre's and stay healthy at the same time by
+giving the users workouts they need to complete. The application uses the spotify api to stream songs from a playlist.
 
 # Diagram
 <img src="./static/images/github/diagram.png" alt="">
