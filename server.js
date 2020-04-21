@@ -39,12 +39,14 @@ import home from './routes/home.js'
 import login from './routes/login.js'
 import callback from './routes/callback.js'
 import refresh_token from './routes/refreshtoken.js'
+import hardcore_room from './routes/hardcoreroom'
 
 APP
   .get('/', (req,res) => home(req,res,COMPONENTPATH,BUNDLE))
   .get('/login', (req, res) => login(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
   .get('/callback', (req, res) => callback(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
   .get('/refresh_token', (req, res) => refresh_token(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
+  .get('/hardcore_room', (req,res) => hardcore_room(req,res,COMPONENTPATH,BUNDLE))
 
 SERVER.listen(PORT, () => console.log(`Using port: ${PORT}`))
 

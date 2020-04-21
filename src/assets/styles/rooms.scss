@@ -1,0 +1,14 @@
+.rooms {
+  padding: 0 20px;
+  &--genre {
+    img {
+      height: 100px;
+    }
+    &:nth-child(even) {
+      background: #78FFB0;
+    }
+    &:nth-child(odd) {
+      background: #BE6CAB;
+    }
+  }
+}

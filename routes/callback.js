@@ -17,7 +17,9 @@ export default function(req,res,COMPONENTPATH,BUNDLE, STATE_KEY) {
     )
   } else {
 
+    // CLEAR THE OLD KEY
     res.clearCookie(STATE_KEY)
+
     const AUTHOPTIONS = {
       url: 'https://accounts.spotify.com/api/token',
       form: {
@@ -45,9 +47,9 @@ export default function(req,res,COMPONENTPATH,BUNDLE, STATE_KEY) {
 
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, body) {
-          console.log(body)
         })
 
+        res.cookie('access_token',access_token)
         // we can also pass the token to the browser to make requests from there
         res.redirect('/#' +
           querystring.stringify({

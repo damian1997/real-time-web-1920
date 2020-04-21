@@ -5,6 +5,7 @@ dotenv.config()
 
 
 export default function(req,res,COMPONENTPATH,BUNDLE, STATE_KEY) {
+  console.log('heey called from refresh token')
    // requesting access token from refresh token
   const refresh_token = req.query.refresh_token
   const AUTHOPTIONS = {
