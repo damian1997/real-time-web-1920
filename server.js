@@ -21,7 +21,8 @@ const PORT = process.env.PORT ||  8888,
 
 // IO NAMESPACES
 const NAMESPACES = {
-  default: IO.of('/')
+  default: IO.of('/'),
+  hardcore_room: IO.of('/hardcore_room')
 }
 
 APP
@@ -47,6 +48,10 @@ APP
   .get('/callback', (req, res) => callback(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
   .get('/refresh_token', (req, res) => refresh_token(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
   .get('/hardcore_room', (req,res) => hardcore_room(req,res,COMPONENTPATH,BUNDLE))
+
+NAMESPACES.hardcore_room.on('connection', (socket) => {
+  console.log('someone connected to hardcore room')
+})
 
 SERVER.listen(PORT, () => console.log(`Using port: ${PORT}`))
 

@@ -1,23 +1,26 @@
 import SpotifyWebApi from 'spotify-web-api-node'
 import dotenv from 'dotenv'
+import { cleanPlaylistData } from '../src/scripts/data'
 dotenv.config()
 
 
-export default function(req,res,COMPONENTPATH,BUNDLE) {
+export default async function(req,res,COMPONENTPATH,BUNDLE) {
   const spotifyApi = new SpotifyWebApi()
-  console.log(req.cookies)
   spotifyApi.setAccessToken(req.cookies.access_token)
 
-  spotifyApi.getPlaylist('6oqxomxWwXLx8Jz2mog7Nw')
+  const playlist = await spotifyApi.getPlaylist('6oqxomxWwXLx8Jz2mog7Nw')
     .then(data => {
-      console.log(data.body.tracks.items[0])
+      return cleanPlaylistData(data.body)
     })
     .catch(error => {
-      console.log(error)
     })
-
-  res.render(`${COMPONENTPATH}/base/views/home`, {
+  
+  console.log(playlist.tracks[0].artists)
+  res.render(`${COMPONENTPATH}/rooms/views/room`, {
     bundledCSS: BUNDLE['main.css'],
-    bundledJS: BUNDLE['main.js']
+    bundledJS: BUNDLE['main.js'],
+    basePartialsPath: `${COMPONENTPATH}/base/views/partials`,
+    playlist_data: playlist
   })
+
 }

@@ -9,7 +9,6 @@ export default function(req,res,COMPONENTPATH,BUNDLE, STATE_KEY) {
   res.cookie(STATE_KEY, STATE)
 
   // Application request authorization
-  console.log(process.env.REDIRECT_URI)
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
