@@ -48,9 +48,12 @@ APP
   .get('/callback', (req, res) => callback(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
   .get('/refresh_token', (req, res) => refresh_token(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
   .get('/hardcore_room', (req,res) => hardcore_room(req,res,COMPONENTPATH,BUNDLE))
-
+let que = []
 NAMESPACES.hardcore_room.on('connection', (socket) => {
-  console.log('someone connected to hardcore room')
+  socket.on('add_track_to_que', track => {
+    que.push(track)
+    console.log(que)
+  })
 })
 
 SERVER.listen(PORT, () => console.log(`Using port: ${PORT}`))

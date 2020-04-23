@@ -14,7 +14,7 @@
     </h2>
     <section class="playlist--tracks">
       <% playlist_data.tracks.forEach(track=> { %>
-        <section class="playlist--tracks--track">
+        <div class="playlist--tracks--track" data-meta="<%= JSON.stringify(track) %>">
           <div>
             <h3>
               <%= track.name %>
@@ -24,13 +24,13 @@
             </h4>
             <ul>
               <% track.artists.forEach(artist=> { %>
-                  <li>
-                    <%= artist.name %>
-                  </li>
+                <li>
+                  <%= artist.name %>
+                </li>
               <% }) %>
             </ul>
           </div>
-        </section>
+        </div>
       <% }) %>
     </section>
   </section>

@@ -15,7 +15,6 @@ export default async function(req,res,COMPONENTPATH,BUNDLE) {
     .catch(error => {
     })
   
-  console.log(playlist.tracks[0].artists)
   res.render(`${COMPONENTPATH}/rooms/views/room`, {
     bundledCSS: BUNDLE['main.css'],
     bundledJS: BUNDLE['main.js'],
