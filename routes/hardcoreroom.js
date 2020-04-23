@@ -4,7 +4,7 @@ import { cleanPlaylistData } from '../src/scripts/data'
 dotenv.config()
 
 
-export default async function(req,res,COMPONENTPATH,BUNDLE) {
+export default async function(req,res,COMPONENTPATH,BUNDLE,QUE) {
   const spotifyApi = new SpotifyWebApi()
   spotifyApi.setAccessToken(req.cookies.access_token)
 
@@ -19,7 +19,8 @@ export default async function(req,res,COMPONENTPATH,BUNDLE) {
     bundledCSS: BUNDLE['main.css'],
     bundledJS: BUNDLE['main.js'],
     basePartialsPath: `${COMPONENTPATH}/base/views/partials`,
-    playlist_data: playlist
+    playlist_data: playlist,
+    que: QUE
   })
 
 }

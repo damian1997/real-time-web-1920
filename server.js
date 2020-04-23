@@ -25,6 +25,8 @@ const NAMESPACES = {
   hardcore_room: IO.of('/hardcore_room')
 }
 
+let que = []
+
 APP
   .use(compression())
   .use(express.static('static'))
@@ -47,8 +49,8 @@ APP
   .get('/login', (req, res) => login(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
   .get('/callback', (req, res) => callback(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
   .get('/refresh_token', (req, res) => refresh_token(req,res,COMPONENTPATH,BUNDLE,STATE_KEY))
-  .get('/hardcore_room', (req,res) => hardcore_room(req,res,COMPONENTPATH,BUNDLE))
-let que = []
+  .get('/hardcore_room', (req,res) => hardcore_room(req,res,COMPONENTPATH,BUNDLE,que))
+
 NAMESPACES.hardcore_room.on('connection', (socket) => {
   socket.on('add_track_to_que', track => {
     que.push(track)
