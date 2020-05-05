@@ -1,58 +1,23 @@
-<%- include(`${basePartialsPath}/head`) %>
-<%- include(`${basePartialsPath}/header`) %>
+<%- include(`${base_partial_path}/head`) %>
+<%- include(`${base_partial_path}/header`) %>
 
 <main>
-  <article>
-    <header>
-      <h1>Welcome to the hardcore party room</h1>
-      <p>Raise the tempo and go nuts listening to some high bpm hardcore beats</p>
-    </header>
-  </article>
+  <section class="users">
+    <ul class="users--list">
+      <% users.forEach(user => { %>
+        <li><%= user.display_name %> <%= user.role %></li>
+      <% }) %>
+    </ul>
+  </section>
   <section class="playlist">
-    <h2>
-      <%= playlist_data.name %>
-    </h2>
-    <section class="playlist--tracks">
-      <% playlist_data.tracks.forEach(track=> { %>
-        <div class="playlist--tracks--track" data-meta="<%= JSON.stringify(track) %>">
-          <div>
-            <h3>
-              <%= track.name %>
-            </h3>
-            <h4>
-              Artists
-            </h4>
-            <ul>
-              <% track.artists.forEach(artist=> { %>
-                <li>
-                  <%= artist.name %>
-                </li>
-              <% }) %>
-            </ul>
-          </div>
-        </div>
-      <% }) %>
-    </section>
+    <ul class="playlist--tracks">
+    </ul>
   </section>
-
-  <section>
-    <p>
-      <% que.forEach(track=> { %>
-        <%= track.name %>
-      <% }) %>
-    </p>
-  </section>
-  <section>
-    <p>
-      HERE COMES QUE
-    </p>
-  </section>
-  <section>
-    <p>
-      HERE COMES CONNECTED USER LIST
-    </p>
+  <section class="current_track">
   </section>
 </main>
 
-<%- include(`${basePartialsPath}/footer`) %>
-<%- include(`${basePartialsPath}/foot`) %>
+
+<%- include(`./partials/playbacksdk.ejs`) %>
+<%- include(`${base_partial_path}/footer`) %>
+<%- include(`${base_partial_path}/foot`) %>

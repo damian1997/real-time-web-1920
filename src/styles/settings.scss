@@ -1,0 +1,44 @@
+:root {
+	--primary-color: #363636;
+	--white-color: #fff;
+	--grey-medium: #ddd;
+}
+
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  src: 'https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap'
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+  font-family: 'roboto', sans-serif;
+	font-size: 16px;
+}
+
+input {
+	font-family: var(--main-font);
+	font-size: 1rem;
+}
+
+button {
+	font-family: var(--main-font);
+	font-size: 1rem;
+}
+
+.loading-container {
+  height: 200px;
+  //background: center center transparent url('../images/Spinner-1s-200px.gif') no-repeat;
+
+  &.hide {
+    display: none;
+  }
+
+  &.show {
+    display: block;
+  }
+
+}

@@ -1,10 +1,28 @@
 import querystring from 'querystring'
 import request from 'request'
 import dotenv from 'dotenv'
+import { generateRandomString } from '../src/scripts/utils'
+
 dotenv.config()
 
+export function login(req,res,STATE_KEY) {
+  const STATE = generateRandomString(16),
+    SCOPE = 'streaming user-modify-playback-state app-remote-control user-read-private user-read-email user-read-currently-playing user-read-playback-state'
+  res.cookie(STATE_KEY, STATE)
 
-export default function(req,res,COMPONENTPATH,BUNDLE, STATE_KEY) {
+  // Application request authorization
+  res.redirect('https://accounts.spotify.com/authorize?' +
+    querystring.stringify({
+      response_type: 'code',
+      client_id: process.env.CLIENT_ID,
+      scope: SCOPE,
+      redirect_uri: process.env.REDIRECT_URI,
+      state: STATE
+    })
+  )
+}
+
+export function callback(req,res,STATE_KEY) {
   const CODE = req.query.code || null,
     STATE = req.query.state || null,
     STOREDSTATE = req.cookies ? req.cookies[STATE_KEY] : null
@@ -16,7 +34,6 @@ export default function(req,res,COMPONENTPATH,BUNDLE, STATE_KEY) {
       })
     )
   } else {
-
     // CLEAR THE OLD KEY
     res.clearCookie(STATE_KEY)
 
@@ -39,6 +56,7 @@ export default function(req,res,COMPONENTPATH,BUNDLE, STATE_KEY) {
         let access_token = body.access_token,
           refresh_token = body.refresh_token
 
+
         let options = {
           url: 'https://api.spotify.com/v1/me',
           headers: { 'Authorization': 'Bearer ' + access_token },
@@ -46,7 +64,7 @@ export default function(req,res,COMPONENTPATH,BUNDLE, STATE_KEY) {
         }
 
         // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) {
+        request.get(options, function(error, response, body) { 
         })
 
         res.cookie('access_token',access_token)
@@ -64,4 +82,26 @@ export default function(req,res,COMPONENTPATH,BUNDLE, STATE_KEY) {
       }
     })
   }
+}
+
+export function refreshToken(req,res) {
+  const refresh_token = req.query.refresh_token
+  const AUTHOPTIONS = {
+    url: 'https://accounts.spotify.com/api/token',
+    headers: { 'Authorization': 'Basic ' + (new Buffer(process.env.CLIENT_ID+ ':' + process.env.CLIENT_SECRET).toString('base64')) },
+    form: {
+      grant_type: 'refresh_token',
+      refresh_token: refresh_token
+    },
+    json: true
+  }
+
+  request.post(authOptions, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      const access_token = body.access_token
+      res.send({
+        'access_token': access_token
+      })
+    }
+  })
 }

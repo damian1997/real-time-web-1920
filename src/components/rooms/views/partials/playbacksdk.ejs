@@ -1,0 +1,116 @@
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<% if(spotify_token) { %>
+  <script>
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      // Fetch api token that has been set
+      const token = '<%= spotify_token %>'
+      const player = new Spotify.Player({
+        name: 'Web Playback SDK Quick Start Player',
+        getOAuthToken: cb => { cb(token) },
+      })
+
+      //spotify:track:43eCo9FFVkQPMAYkQmwCRS
+
+      // Error handling
+      player.addListener('initialization_error', ({ message }) => { console.error(message) })
+      player.addListener('authentication_error', ({ message }) => { console.error(message) })
+      player.addListener('account_error', ({ message }) => { console.error(message) })
+      player.addListener('playback_error', ({ message }) => { console.error(message) })
+
+      // Playback status updates
+      player.addListener('player_state_changed', state => {
+        if(state.paused === false) {
+          const foo = fetch(`https://api.spotify.com/v1/me/player`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer <%= spotify_token %>`
+            },
+          }).then(response => response.json())
+            .then(data => {
+              if(data.item) {
+                const current_track_container = document.querySelector('.current_track')
+                current_track_container.innerHTML = `<div>${data.item.name}</div>`
+              }
+              console.log(data.item)
+            })
+
+        }
+
+        console.log(state.paused)
+      })
+
+      // Ready
+      player.addListener('ready', async ({ device_id }) => {
+        console.log('Ready with Device ID', device_id, ' And token <%= spotify_token %>')
+
+        // Start playing first track from playlist
+        console.log('heey')
+        await playFirstTrack(device_id)
+
+        // TODO Add track status bar
+
+        // Adding tracks to the playback que
+        const playlist_container = document.querySelector('.playlist--tracks')
+        const playlist = await getPlaylist()
+
+        playlist.tracks.items.forEach(track => {
+          playlist_container.insertAdjacentHTML('beforeend', `<li class="playlist--tracks--track" data-trackid="${track.track.id}">${track.track.name}</li>`)
+        })
+
+        const all_tracks = document.querySelectorAll('.playlist--tracks--track')
+        all_tracks.forEach(node => {
+          node.addEventListener('click', event => {
+
+
+            fetch(`https://api.spotify.com/v1/me/player/queue?uri=spotify%3Atrack%3a${event.target.dataset.trackid.toString()}&device_id=${device_id}`, {
+              headers: {
+                Accept: "application/json",
+                Authorization: `Bearer <%= spotify_token %>`,
+                "Content-Type": "application/json"
+              },
+              method: "POST"
+            })
+          })
+        })
+
+      })
+
+      // Not Ready
+      player.addListener('not_ready', ({ device_id }) => {
+        console.log('Device ID has gone offline', device_id)
+      })
+
+
+      // Connect to the player!
+      player.connect()
+    }
+
+    function getPlaylist() {
+      const playlist = fetch(`https://api.spotify.com/v1/playlists/<%= playlist %>`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer <%= spotify_token %>`
+        },
+      }).then(response => {
+        return response.json()
+      })
+
+      return playlist
+    }
+
+    function playFirstTrack(device_id) {
+      fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ uris: ['spotify:track:2Tg6Lh9nlPbH8Qby1uHPeC'] }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer <%= spotify_token %>`
+        },
+      })
+    }
+
+    function getCurrentTrack() {
+    }
+  </script>
+<% } %>
