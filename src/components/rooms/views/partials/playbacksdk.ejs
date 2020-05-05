@@ -40,15 +40,30 @@
         console.log(state.paused)
       })
 
-      // Ready
       player.addListener('ready', async ({ device_id }) => {
         console.log('Ready with Device ID', device_id, ' And token <%= spotify_token %>')
 
-        // Start playing first track from playlist
-        console.log('heey')
-        await playFirstTrack(device_id)
+        // Check if there is a song already in PLAYBACK
+        const is_there_a_track = fetch(`https://api.spotify.com/v1/me/player`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer <%= spotify_token %>`
+          },
+        }).then(response => response.json())
+          .then(data => {
+            if(data.item) {
+              const current_track_container = document.querySelector('.current_track')
+              current_track_container.innerHTML = `<div>${data.item.name}</div>`
+            }
+            console.log(data.item)
+          })
 
-        // TODO Add track status bar
+
+        // IF there is song in playback do this: https://developer.spotify.com/documentation/web-api/reference/player/seek-to-position-in-currently-playing-track/
+
+        // If there is no track in PLAYBACK start first song of playlist
+        await playFirstTrack(device_id)
 
         // Adding tracks to the playback que
         const playlist_container = document.querySelector('.playlist--tracks')

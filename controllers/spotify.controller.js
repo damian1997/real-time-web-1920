@@ -1,6 +1,7 @@
 import querystring from 'querystring'
 import request from 'request'
 import dotenv from 'dotenv'
+import fetch from 'node-fetch'
 import { generateRandomString } from '../src/scripts/utils'
 
 dotenv.config()
@@ -63,17 +64,34 @@ export function callback(req,res,STATE_KEY) {
           json: true
         }
 
-        // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) { 
+
+        //https://api.spotify.com/v1/me 
+        const profile = fetch("https://api.spotify.com/v1/me", {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token}`
+          }
+        }).then(response => {
+          let data = response.json()
+          return data
+        }).catch(error => {
+          console.log(error)
         })
 
         res.cookie('access_token',access_token)
-        // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }))
+
+        Promise.resolve(profile).then((data) => {
+          res.cookie('user', {id: data.id, display_name: data.display_name})
+
+          res.redirect('/#' +
+            querystring.stringify({
+              access_token: access_token,
+              refresh_token: refresh_token
+            }))
+        })
+
       } else {
         res.redirect('/#' +
           querystring.stringify({

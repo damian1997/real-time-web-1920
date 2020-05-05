@@ -10,10 +10,15 @@ function getSocket() {
   switch(filtered_path[0]) {
     case 'party-room':
       const user = JSON.parse(getCookie('user').substr(2))
-      console.log(user)
+      console.log('HEEEY ',user)
+
       socket.emit('new-user', user.display_name, filtered_path[1])
-      socket.on('user-joined', user => {
-        console.log(`User named ${user} joined the room`)
+
+      socket.on('user-joined', user_name => {
+        console.log(user_name)
+
+        const user_list_container = document.querySelector('.users--list')
+        user_list_container.insertAdjacentHTML('beforeend', `<li>${user_name}</li>`)
       })
       break;
     default: 

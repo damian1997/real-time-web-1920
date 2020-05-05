@@ -24,9 +24,7 @@ export async function createRoom(req,res,COMPONENTPATH,BUNDLE) {
     let data = response.json()
     return data
   })
-
-  res.cookie('user', {id: profile.id, display_name: profile.display_name, role: 'leader'})
-
+  
   let profile_playlists = await fetch(`https://api.spotify.com/v1/users/${profile.id}/playlists`, {
     method: 'GET',
     headers: {
@@ -63,7 +61,6 @@ export function setupRoom(req,res,IO,COMPONENTPATH) {
   room.users = []
   room.users.push(req.cookies.user)
   rooms.push(room)
-  
   res.redirect(`/party-room/${req.query.roomid}`)
 }
 
@@ -73,7 +70,9 @@ export function joinRoom(req,res,IO) {
     return room.id === req.query.roomid
   })
   if(room_exists_index != -1) {
+    console.log(req.cookies.user)
     rooms[room_exists_index].users.push(req.cookies.user)
+
     res.redirect(`/party-room/${req.query.roomid}`)
   } else {
     // TODO Error handling if room does not exist
@@ -85,8 +84,7 @@ export function room(req,res,IO,COMPONENTPATH,BUNDLE) {
     return room.id === req.params.id
   })
 
-  console.log(BUNDLE)
-
+  console.log(room.users)
   res.render(`${COMPONENTPATH}/rooms/views/room`, {
     spotify_token: req.cookies.access_token,
     playlist: req.params.id,
