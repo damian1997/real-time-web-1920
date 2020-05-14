@@ -10,6 +10,8 @@ Repository for the Real-Time-Web course.
 * [Data life cycle](#data-life-cycle)
 * [Source of truth](#source-of-truth)
 * [Diagram](#diagram)
+* [Real time events](#real-time-events)
+* [Features](#features)
 
 # Description
 This application tries to bring people together online to listen to their favorite music genre's.
@@ -83,3 +85,5 @@ When someone adds a song the the playback the que overview will be updated.
 * Remove song from que:
 
 When the currently played song is the same as the first song in the que the que will be updated and posted to everyone.
+
+# Features
