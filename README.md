@@ -5,11 +5,11 @@ Repository for the Real-Time-Web course.
 ## Table of contents
 * [Description](#description)
 * [Concept](#concept)
+* [Prerequisites](#prerequisites)
+* [Installing](#installing)
 * [Data life cycle](#data-life-cycle)
 * [Source of truth](#source-of-truth)
 * [Diagram](#diagram)
-* [Prerequisites](#prerequisites)
-* [Installing](#installing)
 
 # Description
 This application tries to bring people together online to listen to their favorite music genre's.
@@ -19,6 +19,32 @@ The application is build with the use of sockets, this enables us to create the 
 Sockets are used to create rooms which people can join and listen to the same music together. The rooms are created with a Spotify playlist
 linked to the room so the users in the same room have the same music in front of them. From this playlist the users can add songs to their
 playback que and others get notified that a song is added to the que.
+
+## Prerequisites
+* Nodejs
+* NPM
+
+## Installing
+
+Clone repository to your local directory
+```
+git clone https://github.com/damian1997/real-time-web-1920.git
+```
+
+Installing dependencies
+```
+npm install
+```
+
+Bundle core assets and watch files
+```
+npm run bundle
+```
+
+Run server localy
+```
+npm run dev
+```
 
 <details>
 <summary>Concept images</summary>
@@ -56,29 +82,3 @@ When someone adds a song the the playback the que overview will be updated.
 * Remove song from que:
 
 When the currently played song is the same as the first song in the que the que will be updated and posted to everyone.
-
-## Prerequisites
-* Nodejs
-* NPM
-
-## Installing
-
-Clone repository to your local directory
-```
-git clone https://github.com/damian1997/real-time-web-1920.git
-```
-
-Installing dependencies
-```
-npm install
-```
-
-Bundle core assets and watch files
-```
-npm run bundle
-```
-
-Run server localy
-```
-npm run dev
-```
