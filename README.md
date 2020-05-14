@@ -59,6 +59,7 @@ Party room after creation with songs and que.
 </details>
 
 # Data life cycle
+This project does not make use of a database and all the information is stored on the server.
 <img src="./github/images/data-life-cycle.png" alt="">
 
 # Source of truth
