@@ -97,7 +97,7 @@ When the currently played song is the same as the first song in the queue the qu
 - [x] Real time updates on current song and playback queue
 
 ## What i still want to implement
-- [  ] Sync playing of music
-- [  ] Pausing and skipping songs
-- [  ] Adjusting volume
-- [  ] Room administration
+- [ ] Sync playing of music
+- [ ] Pausing and skipping songs
+- [ ] Adjusting volume
+- [ ] Room administration
