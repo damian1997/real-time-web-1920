@@ -20,6 +20,18 @@ Sockets are used to create rooms which people can join and listen to the same mu
 linked to the room so the users in the same room have the same music in front of them. From this playlist the users can add songs to their
 playback que and others get notified that a song is added to the que.
 
+<details>
+<summary>Concept images</summary>
+Home page after logging into Spotify.
+<img src="./github/images/home.png" alt="Home page after loging in to spotify">
+
+Creating room page, list of playlists of the user.
+<img src="./github/images/create-party.png" alt="Creating a party room out of your playlists">
+
+Party room after creation with songs and que.
+<img src="./github/images/party-room.png" alt="Party room created with playlist">
+</details>
+
 ## Prerequisites
 * Nodejs
 * NPM
@@ -45,18 +57,6 @@ Run server localy
 ```
 npm run dev
 ```
-
-<details>
-<summary>Concept images</summary>
-Home page after logging into Spotify.
-<img src="./github/images/home.png" alt="Home page after loging in to spotify">
-
-Creating room page, list of playlists of the user.
-<img src="./github/images/create-party.png" alt="Creating a party room out of your playlists">
-
-Party room after creation with songs and que.
-<img src="./github/images/party-room.png" alt="Party room created with playlist">
-</details>
 
 # Data life cycle
 This project does not make use of a database and all the information is stored on the server.
