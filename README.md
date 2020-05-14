@@ -6,6 +6,7 @@ Repository for the Real-Time-Web course.
 * [Description](#description)
 * [Concept](#concept)
 * [Data life cycle](#data-life-cycle)
+* [Source of truth](#source-of-truth)
 * [Diagram](#diagram)
 * [Prerequisites](#prerequisites)
 * [Installing](#installing)
@@ -33,6 +34,24 @@ Party room after creation with songs and que.
 
 # Data life cycle
 <img src="./github/images/data-life-cycle.png" alt="">
+
+# Source of truth
+In this application the server is the only source of truth, everything is stored on the server and only from the server
+decisions are being made. Because everything resides on the server the data is persistent and every user has the correct data
+and is not 1 step behind the rest.
+
+# Real time events
+* Join room
+When a person enters the room others will get a updated list of users.
+
+* Disconnect
+When a person leaves the room others will get a updated list of users.
+
+* Add to que
+When someone adds a song the the playback the que overview will be updated.
+
+* Remove song from que
+When the currently played song is the same as the first song in the que the que will be updated and posted to everyone.
 
 ## Prerequisites
 * Nodejs
