@@ -5,6 +5,7 @@ Repository for the Real-Time-Web course.
 ## Table of contents
 * [Description](#description)
 * [Concept](#concept)
+* [Data life cycle](#data-life-cycle)
 * [Diagram](#diagram)
 * [Prerequisites](#prerequisites)
 * [Installing](#installing)
@@ -30,8 +31,8 @@ Party room after creation with songs and que.
 <img src="./github/images/party-room.png" alt="Party room created with playlist">
 </details>
 
-# Diagram
-<img src="./static/images/github/diagram.png" alt="">
+# Data life cycle
+<img src="./github/images/data-life-cycle.png" alt="">
 
 ## Prerequisites
 * Nodejs
