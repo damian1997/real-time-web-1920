@@ -41,16 +41,20 @@ decisions are being made. Because everything resides on the server the data is p
 and is not 1 step behind the rest.
 
 # Real time events
-* Join room
+* Join room:
+
 When a person enters the room others will get a updated list of users.
 
-* Disconnect
+* Disconnect:
+
 When a person leaves the room others will get a updated list of users.
 
-* Add to que
+* Add to que:
+
 When someone adds a song the the playback the que overview will be updated.
 
-* Remove song from que
+* Remove song from que:
+
 When the currently played song is the same as the first song in the que the que will be updated and posted to everyone.
 
 ## Prerequisites
