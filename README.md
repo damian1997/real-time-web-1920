@@ -87,3 +87,17 @@ When someone adds a song the the playback the que overview will be updated.
 When the currently played song is the same as the first song in the que the que will be updated and posted to everyone.
 
 # Features
+- [x] Multiple rooms support.
+- [x] Multiple people can join 1 room
+- [x] Playlist sync with spotify account
+- [x] Songs play according to que
+- [x] Pushing songs to playback que
+- [x] Playing full songs
+- [x] Disconnecting from rooms updates user list
+- [x] Real time updates on current song and playback que
+
+## What i still want to implement
+- [] Sync playing of music
+- [] Pausing and skipping songs
+- [] Adjusting volume
+- [] Room administration
