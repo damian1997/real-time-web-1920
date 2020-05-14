@@ -1,0 +1,137 @@
+.login-container {
+  padding: 10px 20px;
+  max-width: 1110px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 4px;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  a {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    appearance: none;
+    transition: 250ms ease-out;
+    border: 1px solid #888;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      color: #BE6CAB;
+      border: 1px solid #78FFB0;
+      background: #78FFB0;
+    }
+  }
+}
+
+.create-party {
+  padding: 10px 20px;
+  max-width: 1110px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 4px;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  a {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    appearance: none;
+    transition: 250ms ease-out;
+    border: 1px solid #888;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      color: #BE6CAB;
+      border: 1px solid #78FFB0;
+      background: #78FFB0;
+    }
+  }
+}
+
+.join-party {
+  padding: 10px 20px;
+  max-width: 1110px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 4px;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  form {
+    fieldset {
+      border: 0;
+    }
+
+    label {
+      span {
+        margin-right: 10px;
+      }
+      input {
+        padding: 5px 10px;
+      }
+    }
+
+    input[type=submit] {
+      width: 100%;
+      padding: 10px 0;
+      appearance: none;
+      transition: 250ms ease-out;
+      border: 1px solid #888;
+
+      &:hover {
+        color: #BE6CAB;
+        border: 1px solid #78FFB0;
+        background: #78FFB0;
+      }
+    }
+  }
+}
+
+.home-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.create-container {
+  display: grid;
+  max-width: 1110px;
+  margin: 0 auto;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 2fr;
+
+  .user {
+    color: #fff;
+  }
+
+  .playlists {
+    a {
+      display: block;
+      margin-bottom: 10px;
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        color: #78FFB0;
+      }
+
+      h2 {
+        margin-bottom: 5px;
+      }
+      p {
+        margin-top: 0;
+      }
+    }
+  }
+}

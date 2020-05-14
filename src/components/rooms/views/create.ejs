@@ -3,25 +3,27 @@
 
 <main>
   <!--PLAYLISTS-->
-  <section>
-    <h1>Hi <%= user_profile.display_name%></h1>
-    <p>
-      Pick one of your playlits to create a party room with, you will be able to stream music from that playlist with your friends!
-    </p>
-  </section>
-  <section class="playlists">
-    <% if(playlists.items) { %>
-      <% playlists.items.forEach(playlist => { %>
-        <a href="/setup-room?roomid=<%= playlist.id %>" class="playlists--item" data-roomid="<%= playlist.id %>">
-          <h2><%= playlist.name %></h2>
-          <p>
-            Create room for playlist
-          </p>
-        </a>
-      <% }) %>
-    <% } else { %>
-      no playlists found
-    <% } %>
+  <section class="create-container">
+    <section class="user">
+      <h1>Hi <%= user_profile.display_name%></h1>
+      <p>
+        Pick one of your playlits to create a party room with, you will be able to stream music from that playlist with your friends!
+      </p>
+    </section>
+    <section class="playlists">
+      <% if(playlists.items) { %>
+        <% playlists.items.forEach(playlist => { %>
+          <a href="/setup-room?roomid=<%= playlist.id %>" class="playlists--item" data-roomid="<%= playlist.id %>">
+            <h2><%= playlist.name %></h2>
+            <p>
+              Create room for playlist
+            </p>
+          </a>
+        <% }) %>
+      <% } else { %>
+        no playlists found
+      <% } %>
+    </section>
   </section>
 </main>
 

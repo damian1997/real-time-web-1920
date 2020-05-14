@@ -3,21 +3,32 @@
 
 <main>
   <section class="users">
-    <ul class="users--list">
-      <% users.forEach(user => { console.log(user.display_name)%>
-        <li><%= user.display_name %></li>
-      <% }) %>
-    </ul>
+    <div class="users-container">
+      <ul class="users--list">
+        <li data-spotifyid="<%= self.spotify_id %>"><%= self.display_name %></li>
+        <% users.forEach(user => { %>
+          <li data-spotifyid="<%= user.spotify_id %>"><%= user.display_name %></li>
+        <% }) %>
+      </ul>
+    </div>
   </section>
-  <section class="playlist">
-    <ul class="playlist--tracks">
-    </ul>
+  <section class="sdk-controller-container">
+    <section class="playlist">
+      <ul class="playlist--tracks">
+      </ul>
+    </section>
+    <section class="que">
+      <h2>Songs currently in que</h2>
+      <ul class="que--just-added">
+      </ul>
+      <ul class="que--current"></ul>
+    </section>
   </section>
-  <section class="current_track">
+  <section class="current_track-container">
+    <section class="current_track">
+    </section>
   </section>
 </main>
 
-
-<%- include(`./partials/playbacksdk.ejs`) %>
 <%- include(`${base_partial_path}/footer`) %>
 <%- include(`${base_partial_path}/foot`) %>

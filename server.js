@@ -23,7 +23,7 @@ APP
   .use(compression())
   .use(express.static('static'))
   .use(cors())
-  .use(cookieParser())
+  .use(cookieParser('somesecret'))
   .use(bodyParser.json())
   .use(urlencodedParser)
   .set('view engine', 'ejs')

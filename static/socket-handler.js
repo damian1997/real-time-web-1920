@@ -10,15 +10,26 @@ function getSocket() {
   switch(filtered_path[0]) {
     case 'party-room':
       const user = JSON.parse(getCookie('user').substr(2))
-      console.log('HEEEY ',user)
+      socket.emit('new-user', user, filtered_path[1])
 
-      socket.emit('new-user', user.display_name, filtered_path[1])
-
-      socket.on('user-joined', user_name => {
-        console.log(user_name)
-
+      socket.on('user-joined', user => {
         const user_list_container = document.querySelector('.users--list')
-        user_list_container.insertAdjacentHTML('beforeend', `<li>${user_name}</li>`)
+        const list_node = document.querySelector(`[data-spotifyid*="${user.spotify_id}"]`)
+
+        user_list_container.insertAdjacentHTML('beforeend', `<li data-spotifyid="${user.spotify_id}">${user.display_name}</li>`)
+      })
+
+      socket.on('user-left', user => {
+        console.log('user left')
+        const list_node = document.querySelector(`[data-spotifyid*="${user.spotify_id}"]`)
+        if(list_node) {
+          list_node.remove()
+        }
+      })
+
+      socket.on('track-added-succes', track => {
+        const track_added_overlay = `<li class="track--added-overlay" data-trackid="${track.id}">The track ${track.name} has been added to the playback que</div>`
+        document.querySelector('.que--just-added').insertAdjacentHTML('beforeend',track_added_overlay)
       })
       break;
     default: 

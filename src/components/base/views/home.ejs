@@ -3,28 +3,34 @@
 
 <main>
   <% if(logged_in === true) { %>
-    <section>
-      <h2>Create a party room</h2>
-      <a href="/create-room">Create room</a>
-    </section>
-    <section>
-      <h2>Join a party room</h2>
-      <form class="join-room" name="join-room" action="/join-room" method="GET">
-        <fieldset>
-          <label>
-            Party room code
-            <input name="roomid" type="text" placeholder="Aqw" />
-          </label>
-        </fieldset>
-        <fieldset>
-          <input type="submit" value="Join" />
-        </fieldset>
-      </form>
+    <section class="home-container">
+      <section class="create-party">
+        <h2>Create a party room</h2>
+        <a href="/create-room">Create room</a>
+      </section>
+      <section class="join-party">
+        <h2>Join a party room</h2>
+        <form class="join-room" name="join-room" action="/join-room" method="GET">
+          <fieldset>
+            <label>
+              <span>
+                Party room code
+              </span>
+              <input name="roomid" type="text" placeholder="Aqw" />
+            </label>
+          </fieldset>
+          <fieldset>
+            <input type="submit" value="Join" />
+          </fieldset>
+        </form>
+      </section>
     </section>
   <% } else { %>
-    <section class="login--container">
-      <h1>Please log in to your spotify premium account</h1>
-      <a href="/login">Login</a>
+    <section class="home-container">
+      <section class="login-container">
+        <h1>Please log in to your spotify premium account</h1>
+        <a href="/login">Login</a>
+      </section>
     </section>
   <% } %>
 </main>

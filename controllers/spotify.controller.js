@@ -26,7 +26,7 @@ export function login(req,res,STATE_KEY) {
 export function callback(req,res,STATE_KEY) {
   const CODE = req.query.code || null,
     STATE = req.query.state || null,
-    STOREDSTATE = req.cookies ? req.cookies[STATE_KEY] : null
+    STOREDSTATE = req.cookies? req.cookies[STATE_KEY] : null
 
   if(STATE === null || STATE !== STOREDSTATE) {
     res.redirect('/#' +
@@ -83,7 +83,7 @@ export function callback(req,res,STATE_KEY) {
         res.cookie('access_token',access_token)
 
         Promise.resolve(profile).then((data) => {
-          res.cookie('user', {id: data.id, display_name: data.display_name})
+          res.cookie('user', {spotify_id: data.id, display_name: data.display_name})
 
           res.redirect('/#' +
             querystring.stringify({

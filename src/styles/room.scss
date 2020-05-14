@@ -1,9 +1,67 @@
-.users {}
+.users {
+  background: #78FFB0;
+
+  .users-container {
+    max-width: 1110px;
+    margin: 0 auto;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+}
 .playlist {}
-.current_track {
+
+.current_track-container {
   position: fixed;
   bottom: 0;
   width: 100%;
   padding: 20px 0;
   background: #78FFB0;
+
+  .current_track {
+    max-width: 1110px;
+    margin: 0 auto;
+  }
+}
+
+.sdk-controller-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 20px;
+  max-width: 1110px;
+  padding-top: 40px;
+  margin: 0 auto;
+
+  .playlist {
+    max-height: 500px;
+    overflow: scroll;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        color: #fff;
+
+        &:hover {
+          color: #78FFB0;
+        }
+      }
+    }
+  }
+
+  .que {
+
+    h2 {
+      margin-top: 0;
+    }
+  }
 }

@@ -4,5 +4,9 @@
 </script>
 <script src="/socket-handler.js"></script>
 <script src="/bundle/<%= bundle_js %>"></script>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<% if(sdk === true) { %>
+<%- include(`../../../rooms/views/partials/playbacksdk.ejs`) %>
+<% } %>
 </body>
 </html
