@@ -28,7 +28,7 @@ function getSocket() {
       })
 
       socket.on('track-added-succes', track => {
-        const track_added_overlay = `<li class="track--added-overlay" data-trackid="${track.id}">The track ${track.name} has been added to the playback que</div>`
+        const track_added_overlay = `<li class="track--added-overlay" data-trackid="${track.id}">${track.name}`
         document.querySelector('.que--just-added').insertAdjacentHTML('beforeend',track_added_overlay)
       })
       break;

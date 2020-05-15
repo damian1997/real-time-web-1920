@@ -39,12 +39,12 @@
             })
 
             if(to_be_removed) {
+              socket.emit('remove-from-queue', {room: '<%= room_id %>', track: to_be_removed.dataset.trackid})
               document.querySelector('.que--just-added').removeChild(to_be_removed)
             }
-          }
 
-          console.log('Currently Playing', current_track)
-          console.log('Playing Next', next_track)
+            socket.emit('new-current-track', {room: '<%= room_id %>', track: {id: current_track.id, name: current_track.name}})
+          }
         })
       })
 
@@ -56,7 +56,12 @@
           .then(playlist => {
             constructPlaylist(playlist)
             addEventHandlers(device_id)
-            playFirstTrack(playlist,device_id)
+            console.log('<%= to_be_played.id %>')
+            if('<%= to_be_played.id %>' !== '') {
+              playTrack('<%= to_be_played.id %>',device_id)
+            } else {
+              playFirstTrack(playlist,device_id)
+            }
           })
       })
 
@@ -133,6 +138,17 @@
       fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
         method: 'PUT',
         body: JSON.stringify({ uris: [`spotify:track:${playlist.tracks.items[random_track_index].track.id}`] }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer <%= spotify_token %>`
+        },
+      })
+    }
+
+    function playTrack(trackid,device_id) {
+      fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ uris: [`spotify:track:${trackid}`] }),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer <%= spotify_token %>`

@@ -20,8 +20,12 @@
     <section class="que">
       <h2>Songs currently in que</h2>
       <ul class="que--just-added">
+        <% if(queue.length) { %>
+          <% queue.forEach(queued_track => { %>
+            <li data-trackid="<%= queued_track.id %>"><%= queued_track.name %></li>
+          <% }) %>
+        <% } %>
       </ul>
-      <ul class="que--current"></ul>
     </section>
   </section>
   <section class="current_track-container">

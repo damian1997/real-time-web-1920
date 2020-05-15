@@ -38,7 +38,32 @@ export function init(IO) {
     })
 
     socket.on('track-added-to-que', (params) => {
+      const room_index = rooms.findIndex(room => {
+        return room.id === params.room
+      })
+      
+      rooms[room_index].queue.push(params.track)
       IO.to(params.room).emit('track-added-succes', params.track)
+    })
+
+    socket.on('remove-from-queue', (params) => {
+      const room_index = rooms.findIndex(room => {
+        return room.id === params.room
+      })
+      const song_index = rooms[room_index].queue.findIndex(queued_track=> {
+        return queued_track.id === params.track 
+      })
+
+      rooms[room_index].queue.splice(song_index,1)
+    })
+
+    socket.on('new-current-track', (params) => {
+      const room_index = rooms.findIndex(room => {
+        return room.id === params.room
+      })
+      
+      rooms[room_index].current_track = params.track
+      IO.to(params.room).emit('play-new-track', rooms[room_index].current_track)
     })
   })
 }
@@ -86,12 +111,12 @@ export function setupRoom(req,res,IO,COMPONENTPATH) {
     res.redirect(`/party-room/${req.query.roomid}`) 
   }
 
-  console.log('foo ',req.cookies.access_token)
-
   const room = new Object()
   room.token = req.cookies.access_token,
   room.id = req.query.roomid
   room.users = []
+  room.queue = []
+  room.current_track = {}
   rooms.push(room)
   res.redirect(`/party-room/${req.query.roomid}`)
 }
@@ -117,13 +142,15 @@ export function room(req,res,IO,COMPONENTPATH,BUNDLE) {
   const filtered_users = room.users.filter(user => {
     return user.spotify_id !== req.cookies.user.spotify_id
   })
- 
+
   res.render(`${COMPONENTPATH}/rooms/views/room`, {
     spotify_token: req.cookies.access_token,
     room_token: rooms[room_index].token,
     room_id: req.params.id,
     sdk: true,
     playlist: req.params.id,
+    queue: rooms[room_index].queue,
+    to_be_played: rooms[room_index].current_track,
     self: req.cookies.user,
     users: filtered_users,
     bundle_css: BUNDLE['main.css'],

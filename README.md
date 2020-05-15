@@ -62,7 +62,12 @@ npm run dev
 
 # Data life cycle
 This project does not make use of a database and all the information is stored on the server.
-<img src="./github/images/data-life-cycle.png" alt="">
+
+data-life-cycle v1
+<img src="./github/images/data-life-cycle.png" alt="Version 1 of my data life cycle">
+
+data-life-cycle v2
+<img src="./github/images/data-life-cycle-v2.png" alt="Version 2 of my data life cycle">
 
 # Source of truth
 In this application the server is the only source of truth, everything is stored on the server and only from the server
@@ -85,6 +90,10 @@ When someone adds a song the the playback the  queue overview will be updated.
 * Remove song from queue:
 
 When the currently played song is the same as the first song in the queue the queue will be updated and posted to everyone.
+
+* New current track
+
+When a new track is being played this event fires to update the room object so new people joining the room will listen to the same track.
 
 # Features
 - [x] Multiple rooms support.
